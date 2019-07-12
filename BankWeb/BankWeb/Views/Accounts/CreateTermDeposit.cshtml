@@ -1,0 +1,79 @@
+﻿@model BankWeb.Models.BankEntity.Account
+@{
+    ViewData["Title"] = "CreateTermDeposit";
+}
+
+
+
+    <style>
+        body {
+      background-image: url("https://www.canva.com/ja_jp/learn/wp-content/uploads/sites/10/2019/04/2.jpg");
+            color: black;
+}
+
+a:hover {
+      color: white;
+}
+        #btn {
+            padding: 9px 25px;
+            background-color: rgba(0,136,169,0.4);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease 0s;
+        }
+            #btn:hover {
+                background-color: rgba(0,136,169,0.8);
+                text-decoration: none;
+            }
+            a{
+                text-decoration: none;
+                color: black;
+            }
+    </style>
+
+
+
+<h2 style="margin-bottom: 20px;">Create Term Deposit</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateTermDeposit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <table style="background-color: white; opacity: 0.5; height: 130px; width: 380px; border-radius: 30px; margin-left: 5px; margin-bottom: 20px;">
+                <tr>
+
+                    <td><label asp-for="Balance" class="control-label">Deposit Amount: </label></td>
+                    <td>
+                        <input asp-for="Balance" id="input" />
+                    </td>
+                    <td><span asp-validation-for="Balance" class="text-danger"></span></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="DateClosed" class="control-label">Maturity Date: </label>
+                    </td>
+                    <td>
+                        <input asp-for="DateClosed" id="input" />
+                    </td>
+
+                    <td><span asp-validation-for="DateClosed" class="text-danger"></span></td>
+                </tr>
+
+            </table>
+            <div class="form-group">
+                <input type="submit" value="Create" id="btn" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetTermDeposit">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

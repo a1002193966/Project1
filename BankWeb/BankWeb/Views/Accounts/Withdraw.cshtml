@@ -1,0 +1,78 @@
+﻿@model BankWeb.Models.BankEntity.Account
+
+@{
+    ViewData["Title"] = "Withdraw";
+}
+
+<head>
+    <style>
+        body {
+            background-image: url("https://www.canva.com/ja_jp/learn/wp-content/uploads/sites/10/2019/04/2.jpg");
+            color: black;
+        }
+        #btn {
+                padding: 9px 25px;
+                background-color: rgba(50,0,70,0.4);
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                transition: all 0.3s ease 0s;
+            }
+
+            #btn:hover {
+                background-color: rgba(50,0,70,0.7);
+            }
+            a{
+                text-decoration: none;
+                color: black;
+            }
+    </style>
+</head>
+
+
+
+
+<body>
+    <h2>Withdraw</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Withdraw">
+                @if(ViewBag.Message!=null)
+                {
+                    <p style="color:hotpink;">@ViewBag.Message</p>
+                }
+                <div class="form-group">
+                    <label class="control-label">Withdraw Amount: </label>
+                    <input type="number" name="amount" min="0" id="input" />
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Withdraw" id="btn" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        @{
+            if (Model.AccountType == "Checking")
+            {
+                <a asp-action="GetChecking">Back to List</a>
+            }
+            else if (Model.AccountType == "Business")
+            {
+                <a asp-action="GetBusiness">Back to List</a>
+            }
+            else
+            {
+                <a asp-action="GetTermDeposit">Back to List</a>
+            }
+        }
+    </div>
+
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

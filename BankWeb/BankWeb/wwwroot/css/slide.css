@@ -1,0 +1,22 @@
+﻿@keyframes slidein{
+    from{
+        margin-left: 100%;
+        width: 100%;
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+
+}
+
+p{
+    animation-duration: 3s;
+    animation-name: slidein;
+}
+
+address {
+    font-size: 20px;
+    animation-duration: 3s;
+    animation-name: slidein;
+}

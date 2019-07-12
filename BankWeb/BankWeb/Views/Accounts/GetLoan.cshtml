@@ -1,0 +1,104 @@
+﻿@model IEnumerable<BankWeb.Models.BankEntity.Loan>
+@{
+    ViewData["Title"] = "GetLoan";
+}
+
+
+    <head>
+        <style>
+            body {
+            background-image: url("https://www.canva.com/ja_jp/learn/wp-content/uploads/sites/10/2019/04/2.jpg");
+            color: black;
+        }
+
+        #btn {
+            padding: 9px 25px;
+            background-color: rgba(0,136,50,0.4);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease 0s;
+        }
+
+            #btn:hover {
+                background-color: rgba(0,136,50,0.7);
+                text-decoration: none;
+            }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+            a:hover {
+                color: lightblue;
+            }
+        </style>
+    </head>
+
+
+
+    <body>
+        <h2 style="margin-bottom: 30px;">Loan Account Overview</h2>
+        <span>
+            <a asp-action="CreateLoan" id="btn" >Open Loan</a>
+        </span>
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AccountNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Balance)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Interest)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AccountType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateOpened)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateClosed)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Balance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Interest)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOpened)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateClosed)
+                        </td>
+                        <td>
+                            <a asp-action="PayLoan" asp-route-id="@item.Id">Pay</a> |
+                            <a asp-action="GetTrans" asp-route-id="@item.Id">Transaction</a> |
+                            <a asp-action="Close" asp-route-id="@item.Id">Close</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>

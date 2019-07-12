@@ -1,0 +1,97 @@
+﻿
+@model BankWeb.List.AccountList
+
+@{
+    ViewData["Title"] = "PayLoan";
+}
+
+
+<head>
+    <style>
+        body {
+             background-image: url("https://www.canva.com/ja_jp/learn/wp-content/uploads/sites/10/2019/04/2.jpg");
+            color: black;
+        }
+
+        #btn {
+            padding: 9px 25px;
+            background-color: rgba(50,0,70,0.4);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease 0s;
+        }
+
+            #btn:hover {
+                background-color: rgba(50,0,70,0.7);
+            }
+            a{
+                text-decoration: none;
+                color: black;
+            }
+    </style>
+</head>
+
+
+
+
+<h2>Pay Loan</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PayLoan">
+
+            <div class="form-group">
+
+                <label name="PayFrom">Pay From: </label>
+                <select name="idPay" class="form-group" id="input">
+                    <option disabled>--^^--Checking--^^--</option>
+                    @foreach (var c in Model.CList)
+                    {
+                        @if (c.Id != Model.Act.Id)
+                        {
+                            <option value="@c.Id">Account #: @c.AccountNumber || Balance: @c.Balance </option>
+                        }
+                    }
+                    <option disabled>--^^--Business--^^--</option>
+                    @foreach (var b in Model.BList)
+                    {
+                        @if (b.Id != Model.Act.Id)
+                        {
+                            <option value="@b.Id">Account #: @b.AccountNumber || Balance: @b.Balance </option>
+                        }
+                    }
+                    <option disabled>--^^--Term Deposit--^^--</option>
+                    @foreach (var t in Model.TList)
+                    {
+                        @if (t.Id != Model.Act.Id)
+                        {
+                            <option value="@t.Id">Account #: @t.AccountNumber || Balance: @t.Balance </option>
+                        }
+                    }
+                </select>
+            </div>
+            @if (ViewBag.Message != null)
+            {
+                <p style="color:hotpink;">@ViewBag.Message</p>
+            }
+            <div class="form-group">
+                <label class="control-label">Pay Amount: </label>
+                <input type="number" name="amount" min="0" id="input" />
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Pay" id="btn" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="GetLoan">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

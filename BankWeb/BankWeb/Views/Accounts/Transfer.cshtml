@@ -1,0 +1,101 @@
+﻿
+@model BankWeb.List.AccountList
+
+@{
+    ViewData["Title"] = "Transfer";
+}
+
+
+    <head>
+        <style>
+            body {
+                background-image: url("https://www.canva.com/ja_jp/learn/wp-content/uploads/sites/10/2019/04/2.jpg");
+            color: black;
+            }
+
+            #btn {
+                padding: 9px 25px;
+                background-color: rgba(50,0,70,0.4);
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                transition: all 0.3s ease 0s;
+            }
+
+                #btn:hover {
+                    background-color: rgba(50,0,70,0.7);
+                }
+                a{
+                text-decoration: none;
+                color: black;
+            }
+        </style>
+    </head>
+
+
+
+
+<h2>Transfer</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Transfer">
+
+            <div class="form-group">
+
+                <label name="transferTo">Transfer To: </label>
+                <select name="idTo" class="form-group" id="input">
+                    <option disabled>--^^--Checking--^^--</option>
+                    @foreach (var ch in Model.CList)
+                    {
+                        @if (ch.Id != Model.Act.Id)
+                        {
+                            <option value="@ch.Id">Account #: @ch.AccountNumber || Balance: @ch.Balance </option>
+                        }
+                    }
+                    <option disabled>--^^--Business--^^--</option>
+                    @foreach (var b in Model.BList)
+                    {
+                        @if (b.Id != Model.Act.Id)
+                        {
+                            <option value="@b.Id">Account #: @b.AccountNumber || Balance: @b.Balance </option>
+                        }
+                    }
+                </select>
+            </div>
+            @if (ViewBag.Message != null)
+            {
+                <p style="color:hotpink;">@ViewBag.Message</p>
+            }
+            <div class="form-group">
+                <label class="control-label">Transfer Amount: </label>
+                <input type="number" name="amount" min="0" id="input" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Transfer" id="btn" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @{
+        if (Model.Act.AccountType == "Checking")
+        {
+            <a asp-action="GetChecking">Back to List</a>
+        }
+        else if (Model.Act.AccountType == "Business")
+        {
+            <a asp-action="GetBusiness">Back to List</a>
+        }
+        else
+        {
+            <a asp-action="GetTermDeposit">Back to List</a>
+        }
+    }
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

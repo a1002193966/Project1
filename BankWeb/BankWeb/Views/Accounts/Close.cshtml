@@ -1,0 +1,82 @@
+﻿@model BankWeb.Models.BankEntity.Account
+
+@{
+    ViewData["Title"] = "Close";
+}
+
+    <head>
+        <style>
+            body {
+                background-image: url("https://www.canva.com/ja_jp/learn/wp-content/uploads/sites/10/2019/04/2.jpg");
+            color: black;
+            }
+            #btn {
+                padding: 9px 25px;
+                background-color: rgba(136,0,50,0.4);
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                transition: all 0.3s ease 0s;
+            }
+            #btn:hover {
+                background-color: rgba(136,0,50,0.7);
+            }
+            a{
+                text-decoration: none;
+                color: black;
+            }
+        </style>
+    </head>
+
+
+
+<body>
+<h2>Closing</h2>
+<h3>Are you sure you want to close this account?</h3>
+<div>
+    <hr />
+    <form asp-action="Close">
+        <table class="table table-bordered">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.AccountNumber)
+                    @Html.DisplayFor(model => model.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Balance)
+                    @Html.DisplayFor(model => model.Balance)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.AccountType)
+                    @Html.DisplayFor(model => model.AccountType)
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Close" id="btn" /> 
+    </form>
+    <br />
+    <div>
+        @{
+            if (Model.AccountType == "Checking")
+            {
+                <a asp-action="GetChecking">Back to List</a>
+            }
+            else if (Model.AccountType == "Business")
+            {
+                <a asp-action="GetBusiness">Back to List</a>
+            }
+            else if (Model.AccountType == "TermDeposit")
+            {
+                <a asp-action="GetTermDeposit">Back to List</a>
+            }
+            else
+            {
+                <a asp-action="GetTermLoan">Back to List</a>
+            }
+        }
+    </div>
+
+</div>
+
+</body>

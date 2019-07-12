@@ -1,0 +1,110 @@
+﻿@model IEnumerable<BankWeb.Models.BankEntity.Transaction>
+
+@{
+    ViewData["Title"] = "GetTrans";
+}
+
+
+
+<head>
+    <style>
+        body {
+            background-image: url("https://www.canva.com/ja_jp/learn/wp-content/uploads/sites/10/2019/04/2.jpg");
+            color: black;
+        }
+
+        #btn {
+            padding: 9px 25px;
+            background-color: rgba(50,0,70,0.4);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease 0s;
+        }
+
+            #btn:hover {
+                background-color: rgba(50,0,70,0.7);
+                text-decoration: none;
+            }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+            a:hover {
+                color: lightblue;
+            }
+    </style>
+</head>
+
+
+<body>
+    <h2>Transactions</h2>
+
+    <div>
+        <hr />
+        <form style="margin-bottom: 20px;" class="form-group">
+            <label name="From" class="control-label">From: </label>
+            <span><input type="date" name="from" id="input" /></span>
+            <label name="To">To: </label>
+            <span><input type="date" name="to" id="input"/></span>
+            <input type="submit" value="OK" id="btn" />
+          
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Account ID</th>
+                    <th>Operation</th>
+                    <th>Amount</th>
+                    <th>Date</th>                  
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (ViewBag.Indicator != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.TransId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.AccId)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Operation)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                            </tr>
+                            }
+                        }
+
+                        else
+                        {
+                            int i = 0;
+                            foreach (var item in Model)
+                            {
+                                if (i < 10)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.TransId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.AccId)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Operation)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                    </tr>
+                                }
+                                i++;
+                            }
+                        }
+                    }
+                </tbody>
+        </table>
+
+    </div>
+    <div>
+        <a asp-action="Index">Back to Home</a>
+    </div>
+
+
+</body>

@@ -1,0 +1,29 @@
+﻿
+
+
+#flower {
+    animation: flower 5s infinite;
+    animation-timing-function: linear;
+}
+
+
+@keyframes flower {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#input {
+    border-radius: 30px;
+    color: black;
+    background-color: white;
+}
+
+
+nav {
+    list-style: none;
+}
+
+    nav li a {
+        transition: all 0.3s ease 0s;
+    }
